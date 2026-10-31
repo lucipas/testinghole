@@ -33,8 +33,15 @@ jobs:
 
       - name: Download and install opencode binary
         run: |
-          curl -sSL https://example.com/opencode -o /usr/local/bin/opencode
+          # Replace with your actual valid release binary URL
+          curl -sSL -o /usr/local/bin/opencode "https://github.com/your-org/opencode/releases/latest/download/opencode-linux-amd64"
           chmod +x /usr/local/bin/opencode
+          
+          # Validate that the download succeeded and isn't an HTML error page
+          if head -n 1 /usr/local/bin/opencode | grep -q "<!doctype html>"; then
+            echo "Error: Downloaded file is an HTML page, not a binary. Check your URL."
+            exit 1
+          fi
 
       - name: Run opencode prompt
         env:
