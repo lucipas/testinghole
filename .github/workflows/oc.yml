@@ -37,6 +37,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           prompt: "${{ inputs.prompt }}"
+          model: "opencode-free"
 
       - name: Commit and push changes
         run: |
