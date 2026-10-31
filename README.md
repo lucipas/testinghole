@@ -7,6 +7,7 @@ A minimal, dependency-free static website.
 ```
 .
 ├── index.html          # Main page
+├── blog.html           # Blog page
 ├── assets/
 │   ├── styles.css      # Styles (responsive, dark mode aware)
 │   ├── main.js         # Small progressive-enhancement script
