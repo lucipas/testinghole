@@ -4,10 +4,15 @@ on:
   workflow_dispatch:
     inputs:
       prompt:
-        description: "Prompt for Opencode to execute"
+        description: "Prompt for OpenCode to execute"
         required: true
         type: string
         default: "Scaffold simple html site"
+      model:
+        description: "Model to use, in provider/model format"
+        required: false
+        type: string
+        default: "opencode/big-pickle"
 
 jobs:
   run-opencode:
@@ -15,7 +20,6 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
-      id-token: write
 
     steps:
       - name: Checkout repository
@@ -24,44 +28,51 @@ jobs:
       - name: Configure Git Identity
         run: |
           git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
       - name: Create and checkout new feature branch
         run: |
           BRANCH_NAME="opencode/auto-patch-$(date +%s)"
-          echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
+          echo "BRANCH_NAME=$BRANCH_NAME" >> "$GITHUB_ENV"
           git checkout -b "$BRANCH_NAME"
 
-      - name: Run OpenCode Official Action
-        uses: anomalyco/opencode/github@latest
+      - name: Install latest OpenCode CLI
+        run: |
+          curl -fsSL https://opencode.ai/v2/install | bash
+          echo "$HOME/.opencode/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.opencode/bin:$PATH"
+          opencode --version
+
+      - name: Run OpenCode
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          prompt: "${{ inputs.prompt }}"
-          model: "opencode/free"
+          MODEL: ${{ inputs.model }}
+          PROMPT: ${{ inputs.prompt }}
+        run: |
+          opencode run --standalone --model "$MODEL" --auto "$PROMPT"
 
       - name: Commit and push changes
         run: |
-          git add .
+          git add -A
           if git diff --staged --quiet; then
             echo "No changes detected from opencode execution."
-            echo "CHANGES_MADE=false" >> $GITHUB_ENV
+            echo "CHANGES_MADE=false" >> "$GITHUB_ENV"
           else
             git commit -m "chore: automated update from opencode prompt"
-            git push origin "${{ env.BRANCH_NAME }}"
-            echo "CHANGES_MADE=true" >> $GITHUB_ENV
+            git push -u origin "$BRANCH_NAME"
+            echo "CHANGES_MADE=true" >> "$GITHUB_ENV"
           fi
 
       - name: Create Pull Request and Merge Automatically
         if: env.CHANGES_MADE == 'true'
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PROMPT: ${{ inputs.prompt }}
         run: |
           PR_URL=$(gh pr create \
             --base main \
-            --head "${{ env.BRANCH_NAME }}" \
-            --title "Automated Opencode Changes" \
-            --body "Automated PR generated from prompt: *${{ inputs.prompt }}*")
-          
+            --head "$BRANCH_NAME" \
+            --title "Automated OpenCode Changes" \
+            --body "Automated PR generated from prompt: $PROMPT")
+
           echo "Created PR: $PR_URL"
           gh pr merge "$PR_URL" --merge --delete-branch
