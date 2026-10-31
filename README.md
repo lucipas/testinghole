@@ -7,7 +7,9 @@ A minimal, dependency-free static website.
 ```
 .
 ├── index.html          # Main page
-├── blog.html           # Blog page
+├── blog/
+│   └── index.html      # Blog index (served at /blog)
+├── blog.html           # Redirects to /blog for old links
 ├── assets/
 │   ├── styles.css      # Styles (responsive, dark mode aware)
 │   ├── main.js         # Small progressive-enhancement script
@@ -37,6 +39,8 @@ root as the source.
 ## Customizing
 
 - **Content:** edit `index.html`.
+- **Blog:** edit `blog/index.html`; the placeholder posts are marked with a
+  comment and can be replaced with real content when it is ready.
 - **Look and feel:** edit the CSS variables at the top of `assets/styles.css`.
 - **Additional pages:** copy `index.html`, rename it, and link to it from the
   navigation.

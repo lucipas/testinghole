@@ -302,6 +302,225 @@ code {
   color: var(--text-muted);
 }
 
+/* Blog index */
+
+.blog-hero {
+  padding: 5rem 0 3rem;
+  background:
+    radial-gradient(
+      circle at 15% 0%,
+      color-mix(in srgb, var(--accent) 14%, transparent),
+      transparent 45%
+    ),
+    linear-gradient(180deg, var(--bg-alt), var(--bg));
+  border-bottom: 1px solid var(--border);
+}
+
+.blog-hero h1 {
+  max-width: 16ch;
+  font-size: clamp(2rem, 5vw, 3rem);
+  letter-spacing: -0.02em;
+}
+
+.blog-hero .lead {
+  margin: 0 0 1.75rem;
+  max-width: 640px;
+}
+
+.eyebrow {
+  margin: 0 0 0.75rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.blog-topics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.chip {
+  display: inline-block;
+  padding: 0.4rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--bg);
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.chip:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.chip.is-active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.blog-section {
+  padding-top: 3rem;
+}
+
+.featured-post {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  overflow: hidden;
+  margin-bottom: 2.5rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius) + 4px);
+  box-shadow: var(--shadow);
+}
+
+.featured-body {
+  padding: 2.25rem;
+}
+
+.featured-body h2 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  margin-bottom: 0.5rem;
+}
+
+.featured-body h2 a {
+  color: var(--text);
+}
+
+.featured-body h2 a:hover {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.featured-body > p:not(.eyebrow):not(.post-meta) {
+  color: var(--text-muted);
+}
+
+.featured-media {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 260px;
+  overflow: hidden;
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--accent) 85%, #0f172a),
+    color-mix(in srgb, var(--accent) 35%, #0f172a)
+  );
+}
+
+.featured-media::before {
+  content: "";
+  position: absolute;
+  inset: -30%;
+  background:
+    radial-gradient(
+      circle at 30% 30%,
+      rgba(255, 255, 255, 0.45),
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 70% 75%,
+      rgba(255, 255, 255, 0.18),
+      transparent 45%
+    );
+}
+
+.featured-media span {
+  position: relative;
+  font-size: 5rem;
+  font-weight: 800;
+  letter-spacing: -0.06em;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.section-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.section-heading h2 {
+  margin: 0;
+  font-size: 1.75rem;
+}
+
+.section-heading p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.post-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.25rem;
+}
+
+.post-grid .post {
+  display: flex;
+  flex-direction: column;
+}
+
+.post-tag {
+  margin-bottom: 0.6rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.read-more {
+  margin-top: auto;
+  padding-top: 1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.page-link {
+  padding: 0.55rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.page-link:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.page-link.is-disabled {
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.page-info {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
 /* Footer */
 
 .site-footer {
@@ -340,6 +559,29 @@ code {
   .site-nav ul {
     flex-direction: column;
     gap: 0.75rem;
+  }
+
+  .blog-hero {
+    padding: 3.5rem 0 2.5rem;
+  }
+
+  .featured-post {
+    grid-template-columns: 1fr;
+  }
+
+  .featured-media {
+    order: -1;
+    min-height: 180px;
+  }
+
+  .featured-body {
+    padding: 1.5rem;
+  }
+
+  .section-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.25rem;
   }
 }
 
