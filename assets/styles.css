@@ -248,6 +248,60 @@ code {
   color: var(--text-muted);
 }
 
+/* Blog */
+
+.hero-compact {
+  padding: 4rem 0;
+}
+
+.post-list {
+  display: grid;
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.post {
+  padding: 1.5rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.post h3 {
+  font-size: 1.15rem;
+  margin-bottom: 0.25rem;
+}
+
+.post h3 a {
+  color: var(--text);
+}
+
+.post h3 a:hover {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.post p {
+  margin: 0 0 0.75rem;
+  color: var(--text-muted);
+}
+
+.post p:last-child {
+  margin-bottom: 0;
+}
+
+.post-meta {
+  margin: 0 0 0.75rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.post-more {
+  margin-top: 2rem;
+  color: var(--text-muted);
+}
+
 /* Footer */
 
 .site-footer {
