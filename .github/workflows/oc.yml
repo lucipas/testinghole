@@ -19,22 +19,17 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-      pull-requests: write
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Configure Git Identity
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
-      - name: Create and checkout new feature branch
-        run: |
-          BRANCH_NAME="opencode/auto-patch-$(date +%s)"
-          echo "BRANCH_NAME=$BRANCH_NAME" >> "$GITHUB_ENV"
-          git checkout -b "$BRANCH_NAME"
 
       - name: Install latest OpenCode CLI
         run: |
@@ -55,24 +50,7 @@ jobs:
           git add -A
           if git diff --staged --quiet; then
             echo "No changes detected from opencode execution."
-            echo "CHANGES_MADE=false" >> "$GITHUB_ENV"
           else
             git commit -m "chore: automated update from opencode prompt"
-            git push -u origin "$BRANCH_NAME"
-            echo "CHANGES_MADE=true" >> "$GITHUB_ENV"
+            git push origin HEAD:main
           fi
-
-      - name: Create Pull Request and Merge Automatically
-        if: env.CHANGES_MADE == 'true'
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PROMPT: ${{ inputs.prompt }}
-        run: |
-          PR_URL=$(gh pr create \
-            --base main \
-            --head "$BRANCH_NAME" \
-            --title "Automated OpenCode Changes" \
-            --body "Automated PR generated from prompt: $PROMPT")
-
-          echo "Created PR: $PR_URL"
-          gh pr merge "$PR_URL" --merge --delete-branch
