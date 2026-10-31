@@ -13,9 +13,19 @@ on:
         required: false
         type: string
         default: "opencode/big-pickle"
+  issues:
+    types: [opened, labeled]
 
 jobs:
   run-opencode:
+    if: >
+      github.actor == github.repository_owner &&
+      (github.event_name == 'workflow_dispatch' ||
+       (github.event.action == 'opened' &&
+        !contains(github.event.issue.labels.*.name, 'agent')) ||
+       (github.event.action == 'labeled' &&
+        github.event.label.name == 'agent' &&
+        github.event.issue.state == 'open'))
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -48,8 +58,8 @@ jobs:
 
       - name: Run OpenCode
         env:
-          MODEL: ${{ inputs.model }}
-          PROMPT: ${{ inputs.prompt }}
+          MODEL: ${{ inputs.model || 'opencode/big-pickle' }}
+          PROMPT: ${{ github.event.issue.body || inputs.prompt }}
         run: |
           opencode run --standalone --model "$MODEL" --auto "$PROMPT"
 
@@ -71,12 +81,18 @@ jobs:
         if: steps.commit.outputs.changed == 'true'
         env:
           GH_TOKEN: ${{ secrets.GH_PAT || secrets.GITHUB_TOKEN }}
-          PROMPT: ${{ inputs.prompt }}
+          PROMPT: ${{ github.event.issue.body || inputs.prompt }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
         run: |
+          TITLE="Automated OpenCode Changes"
+          if [ -n "$ISSUE_NUMBER" ]; then
+            TITLE="Automated OpenCode Changes for #$ISSUE_NUMBER"
+          fi
+
           PR_URL=$(gh pr create \
             --base main \
             --head "$BRANCH_NAME" \
-            --title "Automated OpenCode Changes" \
+            --title "$TITLE" \
             --body "$(printf 'Automated PR generated from prompt:\n\n%s\n\nThis PR should not be merged until CodeRabbit has reviewed it.' "$PROMPT")")
 
           echo "url=$PR_URL" >> "$GITHUB_OUTPUT"
