@@ -34,7 +34,7 @@ jobs:
       - name: Download and install opencode binary
         run: |
           # Replace with your actual valid release binary URL
-          curl -sSL -o /usr/local/bin/opencode "https://github.com/anomalyco/opencode/releases/latest/download/opencode-linux-amd64.deb"
+          curl -sSL -o /usr/local/bin/opencode "https://github.com/anomalyco/opencode/releases/tag/v1.19.5/download/opencode-linux-amd64.deb"
           chmod +x /usr/local/bin/opencode
           
           # Validate that the download succeeded and isn't an HTML error page
