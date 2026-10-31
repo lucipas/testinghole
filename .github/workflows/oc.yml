@@ -31,23 +31,12 @@ jobs:
           echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
           git checkout -b "$BRANCH_NAME"
 
-      - name: Download and install opencode binary
-        run: |
-          # Replace with your actual valid release binary URL
-          curl -sSL -o /usr/local/bin/opencode "https://github.com/anomalyco/opencode/releases/tag/v1.19.5/download/opencode-linux-amd64.deb"
-          chmod +x /usr/local/bin/opencode
-          
-          # Validate that the download succeeded and isn't an HTML error page
-          if head -n 1 /usr/local/bin/opencode | grep -q "<!doctype html>"; then
-            echo "Error: Downloaded file is an HTML page, not a binary. Check your URL."
-            exit 1
-          fi
-
-      - name: Run opencode prompt
+      - name: Run OpenCode Official Action
+        uses: anomalyco/opencode/github@latest
         env:
-          OPENCODE_API_KEY: ${{ secrets.OPENCODE_API_KEY }}
-        run: |
-          opencode run --prompt "${{ inputs.prompt }}"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          prompt: "${{ inputs.prompt }}"
 
       - name: Commit and push changes
         run: |
@@ -66,7 +55,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          # Create the pull request
           PR_URL=$(gh pr create \
             --base main \
             --head "${{ env.BRANCH_NAME }}" \
@@ -74,6 +62,4 @@ jobs:
             --body "Automated PR generated from prompt: *${{ inputs.prompt }}*")
           
           echo "Created PR: $PR_URL"
-
-          # Automatically merge the PR and delete the temporary branch
           gh pr merge "$PR_URL" --merge --delete-branch
