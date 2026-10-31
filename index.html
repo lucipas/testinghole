@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>My Site</title>
+    <meta
+      name="description"
+      content="A simple, fast, and responsive static website."
+    />
+    <link rel="stylesheet" href="assets/styles.css" />
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="/">My Site</a>
+
+        <button
+          class="nav-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="site-nav"
+        >
+          Menu
+        </button>
+
+        <nav id="site-nav" class="site-nav" aria-label="Main">
+          <ul>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero">
+        <div class="container">
+          <h1>Build something simple.</h1>
+          <p class="lead">
+            A lightweight starting point for your next static website. No build
+            step, no dependencies, just HTML, CSS, and a little JavaScript.
+          </p>
+          <div class="hero-actions">
+            <a class="button" href="#features">Get started</a>
+            <a class="button button-ghost" href="#about">Learn more</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="features" class="section">
+        <div class="container">
+          <h2>Features</h2>
+          <div class="grid">
+            <article class="card">
+              <h3>Fast</h3>
+              <p>Plain static files that load instantly and deploy anywhere.</p>
+            </article>
+            <article class="card">
+              <h3>Responsive</h3>
+              <p>Looks good on phones, tablets, and desktops out of the box.</p>
+            </article>
+            <article class="card">
+              <h3>Accessible</h3>
+              <p>Semantic markup, skip links, and keyboard-friendly navigation.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="about" class="section section-alt">
+        <div class="container">
+          <h2>About</h2>
+          <p>
+            This template is intentionally minimal. Edit
+            <code>index.html</code> to change the content, tweak
+            <code>assets/styles.css</code> for the look and feel, and add pages
+            as your site grows.
+          </p>
+        </div>
+      </section>
+
+      <section id="contact" class="section">
+        <div class="container">
+          <h2>Contact</h2>
+          <p>
+            Questions? Reach out at
+            <a href="mailto:hello@example.com">hello@example.com</a>.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p>&copy; <span id="year"></span> My Site. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script src="assets/main.js" defer></script>
+  </body>
+</html>
