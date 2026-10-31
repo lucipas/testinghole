@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Blog — My Site</title>
+    <meta
+      name="description"
+      content="Notes, updates, and ideas from My Site. A mockup blog index ready for real content."
+    />
+    <link rel="stylesheet" href="../assets/styles.css" />
+    <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="../index.html">My Site</a>
+
+        <button
+          class="nav-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="site-nav"
+        >
+          Menu
+        </button>
+
+        <nav id="site-nav" class="site-nav" aria-label="Main">
+          <ul>
+            <li><a href="../index.html#features">Features</a></li>
+            <li><a href="../index.html#about">About</a></li>
+            <li><a href="index.html" aria-current="page">Blog</a></li>
+            <li><a href="../index.html#contact">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="blog-hero">
+        <div class="container">
+          <p class="eyebrow">The blog</p>
+          <h1>Notes on building a simpler web.</h1>
+          <p class="lead">
+            Short, practical essays about static sites, thoughtful design, and
+            keeping the web fast and accessible.
+          </p>
+
+          <div class="blog-topics" aria-label="Browse topics">
+            <a class="chip is-active" href="#">All posts</a>
+            <a class="chip" href="#">Guides</a>
+            <a class="chip" href="#">Design</a>
+            <a class="chip" href="#">Workflow</a>
+            <a class="chip" href="#">Accessibility</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section blog-section">
+        <div class="container">
+          <!--
+            Mockup content only. Replace the featured post and post cards below
+            with real article data when it is available.
+          -->
+          <article class="featured-post">
+            <div class="featured-body">
+              <p class="eyebrow">Featured</p>
+              <h2>
+                <a href="#">Getting started with a static site</a>
+              </h2>
+              <p class="post-meta">
+                <time datetime="2026-10-31">October 31, 2026</time>
+                <span aria-hidden="true">·</span>
+                <span>6 min read</span>
+              </p>
+              <p>
+                Why plain HTML, CSS, and JavaScript are still a great choice for
+                small sites, and how to keep them fast, accessible, and easy to
+                maintain.
+              </p>
+              <a class="read-more" href="#">Read article →</a>
+            </div>
+            <div class="featured-media" aria-hidden="true">
+              <span>01</span>
+            </div>
+          </article>
+
+          <div class="section-heading">
+            <h2>Latest posts</h2>
+            <p>Page 1 of 3</p>
+          </div>
+
+          <div class="post-grid">
+            <article class="post">
+              <span class="post-tag">Workflow</span>
+              <h3><a href="#">Keeping things simple</a></h3>
+              <p class="post-meta">
+                <time datetime="2026-10-24">October 24, 2026</time>
+                <span aria-hidden="true">·</span>
+                <span>4 min read</span>
+              </p>
+              <p>
+                A few habits that keep a small website maintainable: few
+                dependencies, shared styles, and content that stays close to the
+                markup.
+              </p>
+              <a class="read-more" href="#">Read article →</a>
+            </article>
+
+            <article class="post">
+              <span class="post-tag">Design</span>
+              <h3><a href="#">Designing for dark mode</a></h3>
+              <p class="post-meta">
+                <time datetime="2026-10-17">October 17, 2026</time>
+                <span aria-hidden="true">·</span>
+                <span>5 min read</span>
+              </p>
+              <p>
+                Using CSS custom properties and
+                <code>prefers-color-scheme</code> to support light and dark
+                themes without duplicating styles.
+              </p>
+              <a class="read-more" href="#">Read article →</a>
+            </article>
+
+            <article class="post">
+              <span class="post-tag">Accessibility</span>
+              <h3><a href="#">A small accessibility checklist</a></h3>
+              <p class="post-meta">
+                <time datetime="2026-10-10">October 10, 2026</time>
+                <span aria-hidden="true">·</span>
+                <span>7 min read</span>
+              </p>
+              <p>
+                The handful of checks worth making before every launch, from
+                keyboard navigation and contrast to clear headings and labels.
+              </p>
+              <a class="read-more" href="#">Read article →</a>
+            </article>
+
+            <article class="post">
+              <span class="post-tag">Guides</span>
+              <h3><a href="#">Why no build step?</a></h3>
+              <p class="post-meta">
+                <time datetime="2026-10-03">October 3, 2026</time>
+                <span aria-hidden="true">·</span>
+                <span>3 min read</span>
+              </p>
+              <p>
+                What you gain when the source files are the site, and when a
+                build pipeline is still worth the extra moving parts.
+              </p>
+              <a class="read-more" href="#">Read article →</a>
+            </article>
+
+            <article class="post">
+              <span class="post-tag">Workflow</span>
+              <h3><a href="#">Writing content close to the markup</a></h3>
+              <p class="post-meta">
+                <time datetime="2026-09-26">September 26, 2026</time>
+                <span aria-hidden="true">·</span>
+                <span>4 min read</span>
+              </p>
+              <p>
+                A content workflow that keeps editing straightforward and avoids
+                a second copy of the truth hidden away in a database.
+              </p>
+              <a class="read-more" href="#">Read article →</a>
+            </article>
+
+            <article class="post">
+              <span class="post-tag">Guides</span>
+              <h3><a href="#">Hosting a static site anywhere</a></h3>
+              <p class="post-meta">
+                <time datetime="2026-09-19">September 19, 2026</time>
+                <span aria-hidden="true">·</span>
+                <span>5 min read</span>
+              </p>
+              <p>
+                A quick tour of the options, from a folder on a server to GitHub
+                Pages, Netlify, Vercel, and Cloudflare Pages.
+              </p>
+              <a class="read-more" href="#">Read article →</a>
+            </article>
+          </div>
+
+          <nav class="pagination" aria-label="Blog pagination">
+            <span class="page-link is-disabled" aria-disabled="true">
+              ← Newer
+            </span>
+            <span class="page-info">Page 1 of 3</span>
+            <a class="page-link" href="#">Older →</a>
+          </nav>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p>&copy; <span id="year"></span> My Site. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script src="../assets/main.js" defer></script>
+  </body>
+</html>
